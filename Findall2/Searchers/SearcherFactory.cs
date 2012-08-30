@@ -19,6 +19,8 @@ namespace Findall2.Searchers
 
         private bool _hidden = false;
 
+        private bool _system = false;
+
         private string _linePattern = "\\d+";
 
         private bool _linesNotMatching = false;
@@ -60,6 +62,15 @@ namespace Findall2.Searchers
         }
 
         /// <summary>
+        /// Indicates system files should be searched (default is false).
+        /// </summary>
+        public bool System
+        {
+            get { return _system; }
+            set { _system = value; }
+        }
+
+        /// <summary>
         /// The regular expression to use for matching lines (default is \d+).
         /// </summary>
         public string LinePattern
@@ -84,7 +95,7 @@ namespace Findall2.Searchers
         /// <returns></returns>
         public Searcher ConstructSearcher()
         {
-            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden);
+            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden, System);
 
             Regex expression = new Regex(LinePattern);
 
