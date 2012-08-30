@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Findall2.Matchers;
 using Findall2.Models;
 using NUnit.Framework;
+using log4net.Config;
 
 namespace Findall2Tests.Matchers
 {

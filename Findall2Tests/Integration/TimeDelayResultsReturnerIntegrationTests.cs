@@ -1,16 +1,24 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using Findall2.Searchers;
 using Findall2.Utilities;
 using Findall2Tests.Logging;
 using NUnit.Framework;
+using log4net;
+using log4net.Config;
 
 namespace Findall2Tests.Integration
 {
     [TestFixture]
     public class TimeDelayResultsReturnerIntegrationTests
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public TimeDelayResultsReturnerIntegrationTests()
+        {
+            XmlConfigurator.Configure();
+        }
+
         [Test]
         [Ignore("Integration")]
         public void TestTimeDelayResultsReturner()
@@ -25,13 +33,13 @@ namespace Findall2Tests.Integration
 
             returner.Finished += s => finished.Set();
 
-            returner.NewResults += r => Debug.Print("Found {0} results at {1}ms", r.Count, (DateTime.Now - start).TotalMilliseconds);
+            returner.NewResults += r => Log.InfoFormat("Found {0} results at {1}ms", r.Count, (DateTime.Now - start).TotalMilliseconds);
 
             returner.Begin();
 
             finished.WaitOne();
 
-            Debug.Print("Search took {0}ms", (DateTime.Now - start).TotalMilliseconds);
+            Log.InfoFormat("Search took {0}ms", (DateTime.Now - start).TotalMilliseconds);
 
             MatchesLogger.LogResult(searcher.Matches);
         }
