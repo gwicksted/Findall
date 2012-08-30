@@ -5,7 +5,6 @@ using System.Threading;
 using Findall2.Matchers;
 using Findall2.Models;
 using Findall2.Readers;
-using Findall2.Scanners;
 
 namespace Findall2.Searchers
 {
