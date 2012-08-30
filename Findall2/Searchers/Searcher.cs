@@ -24,7 +24,7 @@ namespace Findall2.Searchers
 
         private readonly object _matchesMutex = new object();
 
-        private readonly IDirectoryScanner _scanner;
+        private readonly IEnumerable<string> _files;
 
         private readonly FileMatcher _matcher;
 
@@ -33,8 +33,8 @@ namespace Findall2.Searchers
         /// <summary>
         /// Constructs a new instance of Searcher.
         /// </summary>
-        /// <param name="scanner">
-        /// The <see cref="IDirectoryScanner"/> to obtain a list of files from.
+        /// <param name="files">
+        /// The list of files to search.
         /// </param>
         /// <param name="matcher">
         /// The <see cref="FileMatcher"/> to obtain <see cref="FileMatch"/>es from.
@@ -43,14 +43,14 @@ namespace Findall2.Searchers
         /// The <see cref="LineReader"/> used to read lines from the file.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// If <paramref name="scanner"/>, <paramref name="matcher"/>, or
+        /// If <paramref name="files"/>, <paramref name="matcher"/>, or
         /// <paramref name="reader"/> are null.
         /// </exception>
-        public Searcher(IDirectoryScanner scanner, FileMatcher matcher, LineReader reader)
+        public Searcher(IEnumerable<string> files, FileMatcher matcher, LineReader reader)
         {
-            if (scanner == null)
+            if (files == null)
             {
-                throw new ArgumentNullException("scanner");
+                throw new ArgumentNullException("files");
             }
 
             if (matcher == null)
@@ -65,7 +65,7 @@ namespace Findall2.Searchers
 
             _matches = new List<FileMatch>();
 
-            _scanner = scanner;
+            _files = files;
 
             _matcher = matcher;
 
@@ -95,7 +95,7 @@ namespace Findall2.Searchers
         /// </summary>
         private void Search()
         {
-            foreach (string file in _scanner.GetFiles())
+            foreach (string file in _files)
             {
                 IEnumerable<string> lines = _reader.GetLines(file);
 

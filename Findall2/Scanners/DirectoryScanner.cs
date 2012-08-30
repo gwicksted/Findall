@@ -7,7 +7,7 @@ namespace Findall2.Scanners
     /// <summary>
     /// Scans for files in a directory.
     /// </summary>
-    public class DirectoryScanner : IDirectoryScanner
+    public class DirectoryScanner
     {
         private readonly string _path;
 

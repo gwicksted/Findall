@@ -84,7 +84,7 @@ namespace Findall2.Searchers
         /// <returns></returns>
         public Searcher ConstructSearcher()
         {
-            IDirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden);
+            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden);
 
             Regex expression = new Regex(LinePattern);
 
@@ -94,7 +94,7 @@ namespace Findall2.Searchers
 
             FileMatcher fileMatcher = new FileMatcher(lineMatcher);
 
-            return new Searcher(scanner, fileMatcher, new LineReader());
+            return new Searcher(scanner.GetFiles(), fileMatcher, new LineReader());
         }
     }
 }

@@ -46,7 +46,6 @@
     <Compile Include="Scanners\DirectoryScanner.cs" />
     <Compile Include="Models\FileMatch.cs" />
     <Compile Include="Matchers\FileMatcher.cs" />
-    <Compile Include="Scanners\IDirectoryScanner.cs" />
     <Compile Include="Readers\ILineReader.cs" />
     <Compile Include="Models\LineMatch.cs" />
     <Compile Include="Matchers\LineMatcher.cs" />
