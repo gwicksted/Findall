@@ -43,7 +43,7 @@ namespace Findall2.Scanners
         {
             IEnumerable<string> files = Directory.EnumerateFiles(_path, _pattern, _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
-            return files.Where(file => _hidden || IsHidden(file));
+            return files.Where(file => _hidden || !IsHidden(file));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Findall2.Scanners
         /// <returns>True if the file is hidden, false otherwise.</returns>
         private static bool IsHidden(string file)
         {
-            return (new FileInfo(file).Attributes & FileAttributes.Hidden) != FileAttributes.Hidden;
+            return (new FileInfo(file).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden;
         }
     }
 }
