@@ -84,12 +84,3 @@ A free open source "find in files" library for .net.
 * Braces must always be present and must appear on the line below the statement (exceptions: auto properties, lambdas, array initializers)
 * Always include access modifiers
 * No third-party dependencies in library (test project is acceptable)
-
-## TODO:
-
-* TEST - Replace DirectoryScanner and LineReader with unit test ones then test Searcher without integration tests
-* TEST - Use log4net instead of Debug.Print in test project
-* FEATURE - Files not matching
-* FEATURE - Directory scanner ignore System files.
-* IMPROVEMENT - Rename IDirectoryScanner to IFileList or simply IEnumerable<string>
-* IMPROVEMENT - LineReader should take a Stream.  Should have a different class that opens the filestream for it.
