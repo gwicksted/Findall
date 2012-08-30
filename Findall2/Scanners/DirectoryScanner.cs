@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -27,8 +28,30 @@ namespace Findall2.Scanners
         /// <param name="recursive">Indicates subfolders should also be scanned.</param>
         /// <param name="hiddenAllowed">Indicates hidden files are acceptable.</param>
         /// <param name="systemAllowed">Indicates system files are acceptable.</param>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="path"/> is null or <see cref="string.Empty"/>.
+        /// If <paramref name="pattern"/> is null or <see cref="string.Empty"/>.
+        /// </exception>
+        /// <exception cref="DirectoryNotFoundException">
+        /// If the <paramref name="path"/> could not be located on disk.
+        /// </exception>
         public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed)
         {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentNullException("path");
+            }
+
+            if (string.IsNullOrEmpty(pattern))
+            {
+                throw new ArgumentNullException("pattern");
+            }
+
+            if (!Directory.Exists(path))
+            {
+                throw new DirectoryNotFoundException(string.Format("Directory '{0}' not found", path));
+            }
+
             _path = path;
 
             _recursive = recursive;
@@ -46,9 +69,7 @@ namespace Findall2.Scanners
         /// <returns>A list of full file paths.</returns>
         public IEnumerable<string> GetFiles()
         {
-            IEnumerable<string> files = Directory.EnumerateFiles(_path, _pattern, _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-
-            return files.Where(IsFileAcceptable);
+            return Directory.EnumerateFiles(_path, _pattern, _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(IsFileAcceptable);
         }
 
         /// <summary>
