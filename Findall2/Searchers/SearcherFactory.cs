@@ -25,6 +25,8 @@ namespace Findall2.Searchers
 
         private bool _linesNotMatching = false;
 
+        private bool _filesNotMatching = false;
+
         /// <summary>
         /// The base path to begin searching (default is c:\).
         /// </summary>
@@ -81,12 +83,22 @@ namespace Findall2.Searchers
 
         /// <summary>
         /// Indicates a line match when the line does not match the
-        /// <see cref="LinePattern"/>.
+        /// <see cref="LinePattern"/> (default is false).
         /// </summary>
         public bool LinesNotMatching
         {
             get { return _linesNotMatching; }
             set { _linesNotMatching = value; }
+        }
+
+        /// <summary>
+        /// Indicates only files that do not have any matches will be returned
+        /// (default is false).
+        /// </summary>
+        public bool FilesNotMatching
+        {
+            get { return _filesNotMatching; }
+            set { _filesNotMatching = value; }
         }
 
         /// <summary>
@@ -103,7 +115,9 @@ namespace Findall2.Searchers
                               ? (ILineMatcher) new LineNotMatchingMatcher(expression)
                               : new LineMatcher(expression);
 
-            IFileMatcher fileMatcher = new FileMatcher(lineMatcher);
+            IFileMatcher fileMatcher = FilesNotMatching
+                                           ? (IFileMatcher) new FileNotMatchingMatcher(lineMatcher)
+                                           : new FileMatcher(lineMatcher);
 
             return new Searcher(scanner.GetFiles(), fileMatcher, new LineReader());
         }

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Matchers\FileMatcherBase.cs" />
+    <Compile Include="Matchers\FileNotMatchingMatcher.cs" />
     <Compile Include="Matchers\IFileMatcher.cs" />
     <Compile Include="Matchers\ILineMatcher.cs" />
     <Compile Include="Matchers\LineNotMatchingMatcher.cs" />

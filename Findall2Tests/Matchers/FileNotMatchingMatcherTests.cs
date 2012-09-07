@@ -9,93 +9,77 @@ using NUnit.Framework;
 namespace Findall2Tests.Matchers
 {
     [TestFixture]
-    public class FileMatcherTests
+    public class FileNotMatchingMatcherTests
     {
         [Test]
         public void TestNullConstructor()
         {
-            Assert.Throws<ArgumentNullException>(() => new FileMatcher(null));
+            Assert.Throws<ArgumentNullException>(() => new FileNotMatchingMatcher(null));
         }
 
         [Test]
         public void MatchMultipleLines()
         {
-            FileMatcher matcher = GetLowerCaseWordFileMatcher();
+            FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
             string[] lines = new[] {"abc", "def", "ghi"};
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
-            Assert.AreEqual(3, matches.Count());
-
-            Assert.AreEqual(0, matches[0].LineNumber);
-            Assert.AreEqual(1, matches[0].Matches.Count());
-            Assert.AreEqual("abc", matches[0].Line);
-
-            Assert.AreEqual(1, matches[1].LineNumber);
-            Assert.AreEqual(1, matches[1].Matches.Count());
-            Assert.AreEqual("def", matches[1].Line);
-
-            Assert.AreEqual(2, matches[2].LineNumber);
-            Assert.AreEqual(1, matches[2].Matches.Count());
-            Assert.AreEqual("ghi", matches[2].Line);
+            Assert.AreEqual(0, matches.Count());
         }
 
         [Test]
         public void MatchOneLine()
         {
-            FileMatcher matcher = GetLowerCaseWordFileMatcher();
+            FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
             string[] lines = new[] { "abc" };
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
-            Assert.AreEqual(1, matches.Count());
-
-            Assert.AreEqual(0, matches[0].LineNumber);
-            Assert.AreEqual(1, matches[0].Matches.Count());
-            Assert.AreEqual("abc", matches[0].Line);
+            Assert.AreEqual(0, matches.Count());
         }
 
         [Test]
         public void NoMatchNoLines()
         {
-            FileMatcher matcher = GetLowerCaseWordFileMatcher();
+            FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
             string[] lines = new string[0];
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
-            Assert.AreEqual(0, matches.Count());
+            Assert.AreEqual(1, matches.Count());
         }
 
         [Test]
         public void NoMatchManyLines()
         {
-            FileMatcher matcher = GetLowerCaseWordFileMatcher();
+            FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
             string[] lines = new [] { "123", "456", "789" };
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
-            Assert.AreEqual(0, matches.Count());
+            Assert.AreEqual(1, matches.Count());
         }
 
         [Test]
         public void NullLines()
         {
-            FileMatcher matcher = GetLowerCaseWordFileMatcher();
+            FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
             Assert.Throws<ArgumentNullException>(() => matcher.MatchAll(null));
         }
-        
-        private static FileMatcher GetLowerCaseWordFileMatcher()
+
+        private static FileNotMatchingMatcher GetLowerCaseWordFileMatcher()
         {
             Regex expression = new Regex("[a-z]+");
 
             LineMatcher lineMatcher = new LineMatcher(expression);
 
-            FileMatcher matcher = new FileMatcher(lineMatcher);
+            FileNotMatchingMatcher matcher = new FileNotMatchingMatcher(lineMatcher);
 
             return matcher;
         }

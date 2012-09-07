@@ -13,7 +13,9 @@ namespace Findall2Tests.Integration
                 Recursive = true,
                 Hidden = false,
                 LinePattern = "[a-z]+",
-                LinesNotMatching = false
+                System = false,
+                LinesNotMatching = false,
+                FilesNotMatching = false
             };
 
             return factory.ConstructSearcher();

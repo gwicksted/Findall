@@ -6,9 +6,9 @@ using Findall2.Models;
 namespace Findall2.Matchers
 {
     /// <summary>
-    /// Matches all lines of text in a file using a <see cref="LineMatcher"/>.
+    /// Returns a match if no lines of text in a file are matched using a <see cref="LineMatcher"/>.
     /// </summary>
-    public class FileMatcher : FileMatcherBase
+    public class FileNotMatchingMatcher : FileMatcherBase
     {
         /// <summary>
         /// Constructs a new instance of FileMatcher.
@@ -16,7 +16,7 @@ namespace Findall2.Matchers
         /// <param name="matcher">
         /// The <see cref="ILineMatcher"/> to be used when matching individual lines.
         /// </param>
-        public FileMatcher(ILineMatcher matcher)
+        public FileNotMatchingMatcher(ILineMatcher matcher)
             : base(matcher)
         {
         }
@@ -27,7 +27,9 @@ namespace Findall2.Matchers
         /// </summary>
         /// <param name="lines">A list of all the lines of the file.</param>
         /// <returns>
-        /// A list of <see cref="LineMatch"/>es (one for each matched line).
+        /// A list of <see cref="LineMatch"/>es which is:
+        /// Empty if this file had any matches
+        /// Or contains a single result if this file had no matches
         /// </returns>
         public override IEnumerable<LineMatch> MatchAll(IEnumerable<string> lines)
         {
@@ -36,12 +38,19 @@ namespace Findall2.Matchers
                 throw new ArgumentNullException("lines");
             }
 
-            int lineNumber = 0;
+            bool anyMatches = (from line in lines
+                               let matches = Matcher.Match(line)
+                               where matches != null && matches.Any()
+                               select new LineMatch(line, 0, matches)).Any();
 
-            return from line in lines
-                   let matches = Matcher.Match(line)
-                   where matches != null && matches.Any()
-                   select new LineMatch(line, lineNumber++, matches);
+            IList<LineMatch> results = new List<LineMatch>();
+
+            if (!anyMatches)
+            {
+                results.Add(new LineMatch(string.Empty, 0, new ColumnMatch[0]));
+            }
+
+            return results;
         }
     }
 }

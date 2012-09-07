@@ -98,13 +98,12 @@ namespace Findall2.Searchers
             {
                 IEnumerable<string> lines = _reader.GetLines(file);
 
-                IEnumerable<LineMatch> results = _matcher.MatchAll(lines, file);
+                IEnumerable<LineMatch> results = _matcher.MatchAll(lines);
 
                 if (results != null)
                 {
                     IList<LineMatch> resultList = results.ToList();
 
-                    // TODO: option to accept only files not containing any matches
                     if (resultList.Any())
                     {
                         FileMatch fileResults = new FileMatch(file, resultList);
