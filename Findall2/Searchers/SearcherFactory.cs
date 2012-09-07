@@ -103,7 +103,7 @@ namespace Findall2.Searchers
                               ? (ILineMatcher) new LineNotMatchingMatcher(expression)
                               : new LineMatcher(expression);
 
-            FileMatcher fileMatcher = new FileMatcher(lineMatcher);
+            IFileMatcher fileMatcher = new FileMatcher(lineMatcher);
 
             return new Searcher(scanner.GetFiles(), fileMatcher, new LineReader());
         }

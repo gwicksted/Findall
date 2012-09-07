@@ -25,9 +25,9 @@ namespace Findall2.Searchers
 
         private readonly IEnumerable<string> _files;
 
-        private readonly FileMatcher _matcher;
+        private readonly IFileMatcher _matcher;
 
-        private readonly LineReader _reader;
+        private readonly ILineReader _reader;
 
         /// <summary>
         /// Constructs a new instance of Searcher.
@@ -36,16 +36,16 @@ namespace Findall2.Searchers
         /// The list of files to search.
         /// </param>
         /// <param name="matcher">
-        /// The <see cref="FileMatcher"/> to obtain <see cref="FileMatch"/>es from.
+        /// The <see cref="IFileMatcher"/> to obtain <see cref="FileMatch"/>es from.
         /// </param>
         /// <param name="reader">
-        /// The <see cref="LineReader"/> used to read lines from the file.
+        /// The <see cref="ILineReader"/> used to read lines from the file.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="files"/>, <paramref name="matcher"/>, or
         /// <paramref name="reader"/> are null.
         /// </exception>
-        public Searcher(IEnumerable<string> files, FileMatcher matcher, LineReader reader)
+        public Searcher(IEnumerable<string> files, IFileMatcher matcher, ILineReader reader)
         {
             if (files == null)
             {

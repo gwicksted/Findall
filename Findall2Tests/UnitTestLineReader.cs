@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Findall2;
 using Findall2.Readers;
 
 namespace Findall2Tests

@@ -8,7 +8,7 @@ namespace Findall2.Matchers
     /// <summary>
     /// Matches all lines of text in a file using a <see cref="LineMatcher"/>.
     /// </summary>
-    public class FileMatcher
+    public class FileMatcher : IFileMatcher
     {
         private readonly ILineMatcher _matcher;
 
