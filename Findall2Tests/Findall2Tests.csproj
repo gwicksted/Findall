@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\DirectoryScannerTests.cs" />
     <Compile Include="Matchers\FileNotMatchingMatcherTests.cs" />
     <Compile Include="Matchers\FileMatcherTests.cs" />
     <Compile Include="Matchers\LineMatcherTests.cs" />

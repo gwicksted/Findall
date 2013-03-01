@@ -54,6 +54,7 @@
     <Compile Include="Matchers\LineMatcher.cs" />
     <Compile Include="Readers\LineReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scanners\SafeDirectoryEnumerator.cs" />
     <Compile Include="Searchers\Searcher.cs" />
     <Compile Include="Searchers\SearcherFactory.cs" />
     <Compile Include="Utilities\TimeDelayResultsReturner.cs" />

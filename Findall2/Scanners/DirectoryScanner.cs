@@ -23,7 +23,7 @@ namespace Findall2.Scanners
         private readonly DateTime? _minDate;
 
         private readonly DateTime? _maxDate;
-        
+
         /// <summary>
         /// Creates a new instance of DirectoryScanner.
         /// </summary>
@@ -40,7 +40,7 @@ namespace Findall2.Scanners
         /// If the <paramref name="path"/> could not be located on disk.
         /// </exception>
         public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed)
-            : this (path, pattern, recursive, hiddenAllowed, systemAllowed, null, null)
+            : this(path, pattern, recursive, hiddenAllowed, systemAllowed, null, null)
         {
         }
 
@@ -67,7 +67,8 @@ namespace Findall2.Scanners
         /// <exception cref="DirectoryNotFoundException">
         /// If the <paramref name="path"/> could not be located on disk.
         /// </exception>
-        public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed, DateTime? minimumFileDate, DateTime? maximumFileDate)
+        public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed,
+                                DateTime? minimumFileDate, DateTime? maximumFileDate)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -105,7 +106,10 @@ namespace Findall2.Scanners
         /// <returns>A list of full file paths.</returns>
         public IEnumerable<string> GetFiles()
         {
-            return Directory.EnumerateFiles(_path, _pattern, _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(IsFileAcceptable);
+            // The following gets access errors due to Recycle bin permissions:
+            //return Directory.EnumerateFiles(_path, _pattern, _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(IsFileAcceptable);
+
+            return SafeDirectoryEnumerator.EnumerateFiles(_path, _pattern, _recursive).Where(IsFileAcceptable);
         }
 
         /// <summary>
@@ -127,10 +131,10 @@ namespace Findall2.Scanners
         /// Indicates the file dates match what requirements were passed in during construction.
         /// The <see cref="FileInfo.CreationTime"/> must be &gt;= the minimum date or the
         /// <see cref="FileInfo.LastWriteTime"/> must be &gt;= the minimum date or the
-        /// minimum date passed in during custruction must be null.
+        /// minimum date passed in during construction must be null.
         /// The <see cref="FileInfo.CreationTime"/> must be &lt;= the maximum date or the
         /// <see cref="FileInfo.LastWriteTime"/> must be &lt;= the maximum date or the
-        /// maximum date passed in during custruction must be null.
+        /// maximum date passed in during construction must be null.
         /// </summary>
         /// <param name="info"><see cref="FileInfo"/> to collect file dates from.</param>
         /// <returns>
