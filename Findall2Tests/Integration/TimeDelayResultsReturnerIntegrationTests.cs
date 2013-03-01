@@ -43,6 +43,5 @@ namespace Findall2Tests.Integration
 
             MatchesLogger.LogResult(searcher.Matches);
         }
-
     }
 }

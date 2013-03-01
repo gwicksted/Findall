@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Findall2.Matchers;
 using Findall2.Readers;
 using Findall2.Scanners;
@@ -17,15 +18,17 @@ namespace Findall2.Searchers
 
         private bool _recursive = true;
 
-        private bool _hidden = false;
-
-        private bool _system = false;
-
         private string _linePattern = "\\d+";
 
-        private bool _linesNotMatching = false;
-
-        private bool _filesNotMatching = false;
+        public SearcherFactory()
+        {
+            MaximumFileDate = null;
+            MinimumFileDate = null;
+            FilesNotMatching = false;
+            LinesNotMatching = false;
+            System = false;
+            Hidden = false;
+        }
 
         /// <summary>
         /// The base path to begin searching (default is c:\).
@@ -57,20 +60,12 @@ namespace Findall2.Searchers
         /// <summary>
         /// Indicates hidden files should be searched (default is false).
         /// </summary>
-        public bool Hidden
-        {
-            get { return _hidden; }
-            set { _hidden = value; }
-        }
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// Indicates system files should be searched (default is false).
         /// </summary>
-        public bool System
-        {
-            get { return _system; }
-            set { _system = value; }
-        }
+        public bool System { get; set; }
 
         /// <summary>
         /// The regular expression to use for matching lines (default is \d+).
@@ -85,21 +80,25 @@ namespace Findall2.Searchers
         /// Indicates a line match when the line does not match the
         /// <see cref="LinePattern"/> (default is false).
         /// </summary>
-        public bool LinesNotMatching
-        {
-            get { return _linesNotMatching; }
-            set { _linesNotMatching = value; }
-        }
+        public bool LinesNotMatching { get; set; }
 
         /// <summary>
         /// Indicates only files that do not have any matches will be returned
         /// (default is false).
         /// </summary>
-        public bool FilesNotMatching
-        {
-            get { return _filesNotMatching; }
-            set { _filesNotMatching = value; }
-        }
+        public bool FilesNotMatching { get; set; }
+
+        /// <summary>
+        /// File created or last write date must be greater than or equal to this date.
+        /// </summary>
+        /// <remarks>Set to null to indicate no minimum date requirement.</remarks>
+        public DateTime? MinimumFileDate { get; set; }
+
+        /// <summary>
+        /// File created or last write date must be less than or equal to this date.
+        /// </summary>
+        /// <remarks>Set to null to indicate no maximum date requirement.</remarks>
+        public DateTime? MaximumFileDate { get; set; }
 
         /// <summary>
         /// Constructs a new instance of <see cref="Searcher"/>
@@ -107,7 +106,7 @@ namespace Findall2.Searchers
         /// <returns></returns>
         public Searcher ConstructSearcher()
         {
-            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden, System);
+            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden, System, MinimumFileDate, MaximumFileDate);
 
             Regex expression = new Regex(LinePattern);
 

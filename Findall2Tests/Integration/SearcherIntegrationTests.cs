@@ -38,5 +38,47 @@ namespace Findall2Tests.Integration
 
             MatchesLogger.LogResult(searcher.Matches);
         }
+
+        [Test]
+        [Ignore("Integration")]
+        public void TestOneDaySearcher()
+        {
+            Searcher searcher = SearcherIntegrationFactory.GetOneDaySearcher();
+
+            ManualResetEvent finished = new ManualResetEvent(false);
+
+            searcher.SearchFinished += s => finished.Set();
+
+            DateTime start = DateTime.Now;
+
+            searcher.Begin();
+
+            finished.WaitOne();
+
+            Log.InfoFormat("Search took {0}ms", (DateTime.Now - start).TotalMilliseconds);
+
+            MatchesLogger.LogResult(searcher.Matches);
+        }
+
+        [Test]
+        [Ignore("Integration")]
+        public void TestTenDaysSearcher()
+        {
+            Searcher searcher = SearcherIntegrationFactory.GetTenDaysSearcher();
+
+            ManualResetEvent finished = new ManualResetEvent(false);
+
+            searcher.SearchFinished += s => finished.Set();
+
+            DateTime start = DateTime.Now;
+
+            searcher.Begin();
+
+            finished.WaitOne();
+
+            Log.InfoFormat("Search took {0}ms", (DateTime.Now - start).TotalMilliseconds);
+
+            MatchesLogger.LogResult(searcher.Matches);
+        }
     }
 }
