@@ -92,6 +92,10 @@ namespace Findall2.Scanners
             catch (UnauthorizedAccessException)
             {
             }
+            catch (IOException)
+            {
+                // Path not found
+            }
 
             if (files == null) yield break;
 
