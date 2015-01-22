@@ -66,7 +66,10 @@ namespace Findall2.Scanners
             {
             }
 
-            if (directories == null) yield break;
+            if (directories == null)
+            {
+                yield break;
+            }
 
             foreach (string directory in directories)
             {
@@ -97,7 +100,10 @@ namespace Findall2.Scanners
                 // Path not found
             }
 
-            if (files == null) yield break;
+            if (files == null)
+            {
+                yield break;
+            }
 
             // Check exists otherwise this could return matching directories
             foreach (string file in files.Where(File.Exists))

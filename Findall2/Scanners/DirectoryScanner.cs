@@ -12,16 +12,15 @@ namespace Findall2.Scanners
     {
         private readonly string _path;
 
+        private readonly bool _forceRefresh;
         private readonly bool _recursive;
 
         private readonly string _pattern;
 
         private readonly bool _hiddenAllowed;
-
         private readonly bool _systemAllowed;
 
         private readonly DateTime? _minDate;
-
         private readonly DateTime? _maxDate;
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace Findall2.Scanners
         /// If the <paramref name="path"/> could not be located on disk.
         /// </exception>
         public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed)
-            : this(path, pattern, recursive, hiddenAllowed, systemAllowed, null, null)
+            : this(path, pattern, recursive, hiddenAllowed, systemAllowed, null, null, false)
         {
         }
 
@@ -60,6 +59,10 @@ namespace Findall2.Scanners
         /// The created or last write time of the file must be less than or equal to this value.
         /// Provide a null to indicate no constraint on the maximum time.
         /// </param>
+        /// <param name="forceLastWriteRefresh">
+        /// Forces each file's last properties (LastWriteTime) to be refreshed by opening and closing
+        /// the file without requesting any access to it.
+        /// </param>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="path"/> is null or <see cref="string.Empty"/>.
         /// If <paramref name="pattern"/> is null or <see cref="string.Empty"/>.
@@ -68,7 +71,7 @@ namespace Findall2.Scanners
         /// If the <paramref name="path"/> could not be located on disk.
         /// </exception>
         public DirectoryScanner(string path, string pattern, bool recursive, bool hiddenAllowed, bool systemAllowed,
-                                DateTime? minimumFileDate, DateTime? maximumFileDate)
+                                DateTime? minimumFileDate, DateTime? maximumFileDate, bool forceLastWriteRefresh)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -98,6 +101,8 @@ namespace Findall2.Scanners
             _minDate = minimumFileDate;
 
             _maxDate = maximumFileDate;
+
+            _forceRefresh = forceLastWriteRefresh;
         }
 
         /// <summary>
@@ -144,6 +149,11 @@ namespace Findall2.Scanners
         private bool AreTimesAcceptable(FileInfo info)
         {
             bool valid = false;
+
+            if (_forceRefresh)
+            {
+                FileRefresher.RefreshFile(info.FullName);
+            }
 
             if (_minDate != null || _maxDate != null)
             {
