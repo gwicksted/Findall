@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using Findall2.Models;
 using Findall2.Searchers;
-using Findall2Tests.Logging;
+using Findall2Tests.Utilities;
 using NUnit.Framework;
 using log4net;
 using log4net.Config;
@@ -33,10 +35,10 @@ namespace Findall2Tests.Integration
             searcher.Begin();
 
             finished.WaitOne();
+            
+            Log.InfoFormat("Search took {0}ms, ({1} results)", (DateTime.Now - start).TotalMilliseconds, searcher.Matches.Count);
 
-            Log.InfoFormat("Search took {0}ms", (DateTime.Now - start).TotalMilliseconds);
-
-            MatchesLogger.LogResult(searcher.Matches);
+            MatchesLogger.LogFiles(searcher.Matches);
         }
 
         [Test]

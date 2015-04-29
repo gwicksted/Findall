@@ -101,12 +101,17 @@ namespace Findall2.Searchers
         public DateTime? MaximumFileDate { get; set; }
 
         /// <summary>
+        /// Force the last write time to refresh by opening a handle to the file.
+        /// </summary>
+        public bool ForceLastWriteRefresh { get; set; }
+
+        /// <summary>
         /// Constructs a new instance of <see cref="Searcher"/>
         /// </summary>
         /// <returns></returns>
         public Searcher ConstructSearcher()
         {
-            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden, System, MinimumFileDate, MaximumFileDate);
+            DirectoryScanner scanner = new DirectoryScanner(Path, FileNamePattern, Recursive, Hidden, System, MinimumFileDate, MaximumFileDate, ForceLastWriteRefresh);
 
             Regex expression = new Regex(LinePattern);
 

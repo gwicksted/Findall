@@ -102,8 +102,8 @@ namespace Findall2.Searchers
 
                 if (results != null)
                 {
-                    IList<LineMatch> resultList = results.ToList();
-
+                    IList<LineMatch> resultList = results.ToArray();
+                    
                     if (resultList.Any())
                     {
                         FileMatch fileResults = new FileMatch(file, resultList);

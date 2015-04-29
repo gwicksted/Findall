@@ -21,7 +21,7 @@ namespace Findall2Tests.Integration
         [Ignore("Integration")]
         public void TestRecycleBinError()
         {
-            DirectoryScanner scanner = new DirectoryScanner(@"C:\$Recycle.Bin\", "*.*", true, false, false, DateTime.Now - new TimeSpan(1, 0, 0, 0), DateTime.Now);
+            DirectoryScanner scanner = new DirectoryScanner(@"C:\$Recycle.Bin\", "*.*", true, false, false, DateTime.Now - new TimeSpan(1, 0, 0, 0), DateTime.Now, true);
 
             IEnumerable<string> files = scanner.GetFiles();
 

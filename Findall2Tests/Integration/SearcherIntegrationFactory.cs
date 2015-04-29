@@ -1,5 +1,6 @@
 ﻿using System;
 using Findall2.Searchers;
+using Findall2Tests.Utilities;
 
 namespace Findall2Tests.Integration
 {
@@ -9,11 +10,11 @@ namespace Findall2Tests.Integration
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.txt",
-                Path = @"C:\test\",
+                FileNamePattern = "*.dll",
+                Path =  ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
-                LinePattern = "[a-z]+",
+                LinePattern = ".+",
                 System = false,
                 LinesNotMatching = false,
                 FilesNotMatching = false
@@ -26,8 +27,8 @@ namespace Findall2Tests.Integration
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.txt",
-                Path = @"C:\test\",
+                FileNamePattern = "*.dll",
+                Path = ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
                 LinePattern = "[a-z]+",
@@ -45,8 +46,8 @@ namespace Findall2Tests.Integration
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.txt",
-                Path = @"C:\test\",
+                FileNamePattern = "*.dll",
+                Path = ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
                 LinePattern = "[a-z]+",

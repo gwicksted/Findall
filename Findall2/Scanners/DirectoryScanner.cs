@@ -148,7 +148,7 @@ namespace Findall2.Scanners
         /// </returns>
         private bool AreTimesAcceptable(FileInfo info)
         {
-            bool valid = false;
+            bool valid = true;
 
             if (_forceRefresh)
             {
@@ -180,11 +180,12 @@ namespace Findall2.Scanners
         {
             FileAttributes attributes = info.Attributes;
 
-            bool fileIsHidden = (attributes & FileAttributes.Hidden) != FileAttributes.Hidden;
+            bool fileIsHidden = (attributes & FileAttributes.Hidden) == FileAttributes.Hidden;
 
-            bool fileIsSystem = (attributes & FileAttributes.System) != FileAttributes.System;
+            bool fileIsSystem = (attributes & FileAttributes.System) == FileAttributes.System;
 
-            return (_hiddenAllowed || fileIsHidden) && (_systemAllowed || fileIsSystem);
+            return (!fileIsHidden || _hiddenAllowed) 
+                && (!fileIsSystem || _systemAllowed);
         }
     }
 }

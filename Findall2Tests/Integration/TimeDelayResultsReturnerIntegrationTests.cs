@@ -2,7 +2,7 @@
 using System.Threading;
 using Findall2.Searchers;
 using Findall2.Utilities;
-using Findall2Tests.Logging;
+using Findall2Tests.Utilities;
 using NUnit.Framework;
 using log4net;
 using log4net.Config;

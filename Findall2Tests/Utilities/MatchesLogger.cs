@@ -2,7 +2,7 @@
 using Findall2.Models;
 using log4net;
 
-namespace Findall2Tests.Logging
+namespace Findall2Tests.Utilities
 {
     public static class MatchesLogger
     {
@@ -24,6 +24,14 @@ namespace Findall2Tests.Logging
                                     columnMatch.GetMatchedSubstring(lineMatch.Line));
                     }
                 }
+            }
+        }
+
+        public static void LogFiles(IList<FileMatch> matches)
+        {
+            foreach (FileMatch fileMatch in matches)
+            {
+                Log.DebugFormat("Match {0}", fileMatch.Path);
             }
         }
     }
