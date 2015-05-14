@@ -76,6 +76,9 @@ namespace Findall2.Searchers
         /// </summary>
         public SearchFinished SearchFinished { get; set; }
 
+        /// <summary>
+        /// Initiates the search on a different thread using the <see cref="ThreadPool"/>.
+        /// </summary>
         public void Begin()
         {
             ThreadPool.QueueUserWorkItem(o =>

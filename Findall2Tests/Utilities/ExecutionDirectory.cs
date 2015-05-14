@@ -8,7 +8,7 @@ namespace Findall2Tests.Utilities
     {
         public static string FindExecutionDirectory()
         {
-            return FindExecutionDirectory(Assembly.GetExecutingAssembly());
+            return FindExecutionDirectory(Assembly.GetCallingAssembly());
         }
 
         public static string FindExecutionDirectory(Assembly assembly)

@@ -4,17 +4,19 @@ using Findall2Tests.Utilities;
 
 namespace Findall2Tests.Integration
 {
-    public static class SearcherIntegrationFactory
+    public static class SearcherTestFactory
     {
+        private const string XmlPattern = "^\\s*\\<[a-z]+?\\>[^<]+\\</[a-z]+?\\>\\s*$";
+
         public static Searcher GetSearcher()
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.dll",
+                FileNamePattern = "*.xml",
                 Path =  ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
-                LinePattern = ".+",
+                LinePattern = XmlPattern,
                 System = false,
                 LinesNotMatching = false,
                 FilesNotMatching = false
@@ -27,11 +29,11 @@ namespace Findall2Tests.Integration
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.dll",
+                FileNamePattern = "*.xml",
                 Path = ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
-                LinePattern = "[a-z]+",
+                LinePattern = XmlPattern,
                 System = false,
                 LinesNotMatching = false,
                 FilesNotMatching = false,
@@ -46,11 +48,11 @@ namespace Findall2Tests.Integration
         {
             SearcherFactory factory = new SearcherFactory
             {
-                FileNamePattern = "*.dll",
+                FileNamePattern = "*.xml",
                 Path = ExecutionDirectory.FindExecutionDirectory(),
                 Recursive = true,
                 Hidden = false,
-                LinePattern = "[a-z]+",
+                LinePattern = XmlPattern,
                 System = false,
                 LinesNotMatching = false,
                 FilesNotMatching = false,

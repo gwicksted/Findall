@@ -34,7 +34,7 @@ namespace Findall2.Utilities
     /// that periodically polls for new results and calls back
     /// indicating when there are new matches.
     /// </summary>
-    public class TimeDelayResultsReturner : IDisposable
+    public sealed class TimeDelayResultsReturner : IDisposable
     {
         private readonly Searcher _searcher;
 

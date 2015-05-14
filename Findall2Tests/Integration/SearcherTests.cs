@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Linq;
+using System.Reflection;
 using System.Threading;
-using Findall2.Models;
 using Findall2.Searchers;
 using Findall2Tests.Utilities;
-using NUnit.Framework;
 using log4net;
 using log4net.Config;
+using NUnit.Framework;
 
 namespace Findall2Tests.Integration
 {
     [TestFixture]
-    public class SearcherIntegrationTests
+    public class SearcherTests
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SearcherIntegrationTests()
+        public SearcherTests()
         {
             XmlConfigurator.Configure();
         }
 
         [Test]
-        [Ignore("Integration")]
         public void TestSearcher()
         {
-            Searcher searcher = SearcherIntegrationFactory.GetSearcher();
+            Searcher searcher = SearcherTestFactory.GetSearcher();
 
             ManualResetEvent finished = new ManualResetEvent(false);
 
@@ -42,10 +40,9 @@ namespace Findall2Tests.Integration
         }
 
         [Test]
-        [Ignore("Integration")]
         public void TestOneDaySearcher()
         {
-            Searcher searcher = SearcherIntegrationFactory.GetOneDaySearcher();
+            Searcher searcher = SearcherTestFactory.GetOneDaySearcher();
 
             ManualResetEvent finished = new ManualResetEvent(false);
 
@@ -63,10 +60,9 @@ namespace Findall2Tests.Integration
         }
 
         [Test]
-        [Ignore("Integration")]
         public void TestTenDaysSearcher()
         {
-            Searcher searcher = SearcherIntegrationFactory.GetTenDaysSearcher();
+            Searcher searcher = SearcherTestFactory.GetTenDaysSearcher();
 
             ManualResetEvent finished = new ManualResetEvent(false);
 

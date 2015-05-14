@@ -20,6 +20,9 @@ namespace Findall2.Searchers
 
         private string _linePattern = "\\d+";
 
+        /// <summary>
+        /// Constructs a new instance of the SearcherFactory.
+        /// </summary>
         public SearcherFactory()
         {
             MaximumFileDate = null;

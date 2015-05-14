@@ -1,9 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Findall2", "Findall2\Findall2.csproj", "{54E9DF90-9DC1-403D-A566-EBB2578096C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Findall2Tests", "Findall2Tests\Findall2Tests.csproj", "{CFBFC722-ADF0-4796-9D82-2D08F12AA071}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6B08366F-0B7F-4E5F-AE7E-9EEB2FFBD5E4}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +22,12 @@ Global
 		{54E9DF90-9DC1-403D-A566-EBB2578096C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E9DF90-9DC1-403D-A566-EBB2578096C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E9DF90-9DC1-403D-A566-EBB2578096C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E9DF90-9DC1-403D-A566-EBB2578096C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{CFBFC722-ADF0-4796-9D82-2D08F12AA071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CFBFC722-ADF0-4796-9D82-2D08F12AA071}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFBFC722-ADF0-4796-9D82-2D08F12AA071}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFBFC722-ADF0-4796-9D82-2D08F12AA071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBFC722-ADF0-4796-9D82-2D08F12AA071}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

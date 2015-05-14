@@ -10,20 +10,19 @@ using log4net.Config;
 namespace Findall2Tests.Integration
 {
     [TestFixture]
-    public class TimeDelayResultsReturnerIntegrationTests
+    public class TimeDelayResultsReturnerTests
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public TimeDelayResultsReturnerIntegrationTests()
+        public TimeDelayResultsReturnerTests()
         {
             XmlConfigurator.Configure();
         }
 
         [Test]
-        [Ignore("Integration")]
         public void TestTimeDelayResultsReturner()
         {
-            Searcher searcher = SearcherIntegrationFactory.GetSearcher();
+            Searcher searcher = SearcherTestFactory.GetSearcher();
 
             ManualResetEvent finished = new ManualResetEvent(false);
 

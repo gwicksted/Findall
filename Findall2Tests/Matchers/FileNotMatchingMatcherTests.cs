@@ -22,7 +22,7 @@ namespace Findall2Tests.Matchers
         {
             FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
-            string[] lines = new[] {"abc", "def", "ghi"};
+            string[] lines = {"abc", "def", "ghi"};
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
@@ -34,7 +34,7 @@ namespace Findall2Tests.Matchers
         {
             FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
-            string[] lines = new[] { "abc" };
+            string[] lines = { "abc" };
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 
@@ -58,7 +58,7 @@ namespace Findall2Tests.Matchers
         {
             FileNotMatchingMatcher matcher = GetLowerCaseWordFileMatcher();
 
-            string[] lines = new [] { "123", "456", "789" };
+            string[] lines = { "123", "456", "789" };
 
             IList<LineMatch> matches = matcher.MatchAll(lines).ToList();
 

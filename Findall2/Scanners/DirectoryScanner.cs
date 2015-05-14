@@ -134,11 +134,11 @@ namespace Findall2.Scanners
 
         /// <summary>
         /// Indicates the file dates match what requirements were passed in during construction.
-        /// The <see cref="FileInfo.CreationTime"/> must be &gt;= the minimum date or the
-        /// <see cref="FileInfo.LastWriteTime"/> must be &gt;= the minimum date or the
+        /// The <see cref="FileSystemInfo.CreationTime"/> must be &gt;= the minimum date or the
+        /// <see cref="FileSystemInfo.LastWriteTime"/> must be &gt;= the minimum date or the
         /// minimum date passed in during construction must be null.
-        /// The <see cref="FileInfo.CreationTime"/> must be &lt;= the maximum date or the
-        /// <see cref="FileInfo.LastWriteTime"/> must be &lt;= the maximum date or the
+        /// The <see cref="FileSystemInfo.CreationTime"/> must be &lt;= the maximum date or the
+        /// <see cref="FileSystemInfo.LastWriteTime"/> must be &lt;= the maximum date or the
         /// maximum date passed in during construction must be null.
         /// </summary>
         /// <param name="info"><see cref="FileInfo"/> to collect file dates from.</param>

@@ -40,7 +40,7 @@ namespace Findall2.Matchers
         /// <param name="line">A line of text to match.</param>
         /// <returns>
         /// A list of <see cref="ColumnMatch"/>es that were found in
-        /// the <see cref="line"/>.
+        /// the <paramref name="line"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="line"/> was null.
