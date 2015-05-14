@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Findall</id>
-    <version>2.2.1</version>
+    <version>2.2.2</version>
     <owners>Graeme Wicksted</owners>
     <authors>Graeme Wicksted</authors>
     <licenseUrl>https://github.com/gwicksted/Findall/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/gwicksted/Findall</projectUrl>
-    <iconUrl>https://github.com/gwicksted/Findall/nuget-icon.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/gwicksted/Findall/master/Findall2/nuget-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A free open source (MIT) "find in files" library for .net.</description>
-    <releaseNotes>Fixed bug with path not found with the SafeDirectoryEnumerator, changed assembly version and NuGet package version to match.</releaseNotes>
+    <releaseNotes>Changes primarily related to NuGet publication to get pdbs into symbolsource.</releaseNotes>
     <language>en-US</language>
   </metadata>
 </package>
