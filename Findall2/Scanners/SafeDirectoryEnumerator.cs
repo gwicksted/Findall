@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Findall2.Scanners
 {
@@ -64,6 +63,10 @@ namespace Findall2.Scanners
             }
             catch (UnauthorizedAccessException)
             {
+            }
+            catch (IOException)
+            {
+                // Path not found
             }
 
             if (directories == null)
